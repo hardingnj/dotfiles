@@ -1,0 +1,25 @@
+"hg6882
+
+loadplugins '\.(js|penta)$'
+group user
+abbreviate .add 477 Roncesvalles
+abbreviate .bar 2176100749974400
+abbreviate .em nickharding@gmail.com
+abbreviate .njh Nick Harding
+abbreviate .pc M6R 2N4
+abbreviate .wem nicholas.harding@oicr.on.ca
+command! escandnexttab <ESC> :tabn<Return>
+command! mendeley -javascript javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','http://www.mendeley.com/minified/bookmarklet.js');
+command! spritz -javascript javascript:(function(){ cb = function(){ create_spritz();}; var script=document.createElement('SCRIPT');script.src='https://miserlou.github.io/OpenSpritz/spritz.js?callback=cb?callback=cb'; script.onload=cb; document.body.appendChild(script);})();
+command SPRITZ -javascript javascript:(function(){%20cb%20=%20function(){%20create_spritz();};%20var%20script=document.createElement('SCRIPT');script.src='https://miserlou.github.io/OpenSpritz/spritz.js?callback=cb?callback=cb';%20script.onload=cb;%20document.body.appendChild(script);})();
+map -count -modes=n,v <S-LEFT> <count>:tabp<Return>
+map -count -modes=n,v <S-RIGHT> <count>:tabn<Return>
+map -count -modes=n,v <BS> <count>:back<Return>
+map -count -modes=n,v <S-BS> <count>:forward<Return>
+map -modes=n,v ll -ex o librify
+map -modes=n,v mm -ex :open mendeley
+map -modes=n,v rr -ex :open spritz
+"set complete=bookmark,search,file
+set defsearch=duckduckgo
+set passkeys=mail.google.com:djkrxe<CR>?/,gi,gs,gt,tweetdeck.twitter.com:lkjhrtnd<CR><UP><DOWN><LEFT><RIGHT>?P<CTRL-CR><BS><ESC>s0123456789,fastmail.fm:kj<CR>u.xcrXg!oawynp#e<UP><DOWN><LEFT><RIGHT>/?
+" vim: set ft=pentadactyl:
