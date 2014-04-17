@@ -37,3 +37,23 @@ snoremap <Left> bi
 snoremap <Right> a
 "snoremap <BS> b<BS>
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
+
+" NH shortcuts for hiding numbers
+cabbr UCOPY set list|set number
+cabbr COPY set nolist|set nonumber
+map [ :COPY
+map ] :UCOPY
+
+" backspace-s replaces word under cursor
+nnoremap \s :%s/\<\>/
+
+" argument rewrapo
+function! Indent()
+  normal ^%jI	k^
+endfunction
+function! Indent2()
+  normal ^i	
+endfunction
+
+nnoremap <silent> <leader>e :call argumentrewrap#RewrapArguments()<CR>:call Indent()<CR>
+nnoremap <silent> <leader>w :call argumentrewrap#RewrapArguments()<CR>:call Indent2()<CR>
