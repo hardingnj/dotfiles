@@ -54,9 +54,7 @@ alias ll='ls -hl'
 alias dushd='find . -maxdepth 1 -type d -exec du -sh {} \;'
 alias qq='qstat -r | grep "job-ID\|----\|nharding\|jobname" | sed 3~1"N;s/\n *Full jobname: */ /"|less'
 alias la='ls -A'
-alias pbl='module load Perl-BL'
 alias tv='module load tmux vim'
-alias rbl='module load R-BL'
 alias quser='qstat -s r -u "*" | awk '"'"'{print $4}'"'"' | sort | uniq -c | sort -n'
 alias qwait='qq| grep " qw"| wc -l'
 alias l='ls -CF'
@@ -69,8 +67,7 @@ alias aggjn='qstat | grep " qw"| awk '"'"'{print $3}'"'"' | sort | uniq -c'
 alias nl='nautilus .'
 alias cdp='cd $(pwd -P)'
 
-# load common modules
-tv
+# Ignore case for auto complete
 bind 'set completion-ignore-case on'
 
 # Functions
@@ -81,14 +78,10 @@ manopt(){ man $1 |sed 's/.\x08//g'|sed -n "/^\s\+-\+$2\b/,/^\s*$/p"|sed '$d;';}
 
 export EDITOR=vim
 export TERM=xterm
-export TMP=/.mounts/sata/bas020/scratch/user/nharding
 source /etc/profile
-export SVN_MERGE='/u/nharding/.subversion/svnvimmerge.sh'
 export SVN_MERGE_SET='1'
-export PATH=$PATH:/mnt/boutroslab//private/Software/R-BL/bin:/mnt/boutroslab//private/Software/Perl-BL/bin:
-export LD_LIBRARY_PATH=/mnt/boutroslab//private/Software/R-BL/lib64:$LD_LIBRARY_PATH
-export PERL5LIB=/mnt/boutroslab//private/Software/Perl-BL/lib64:$PERL5LIB
-export MANPATH=/mnt/boutroslab//private/Software/R-BL/share/man:/mnt/boutroslab//private/Software/Perl-BL/man:$MANPATH
-export PATH=/opt/tmux-1.8/bin/:$PATH
+
 export BCV_HOME=/path/to/examples/bcvhome
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/oicr/local/analysis/sw/boost/boost_1_53_0/lib
+
+export PATH=$PATH:/home/njh/src/bin
