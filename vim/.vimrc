@@ -1,5 +1,3 @@
-source /.mounts/labs/boutroslab/private/Resources/etc/vimrc
-
 autocmd BufWinLeave .* mkview
 autocmd BufWinEnter .* silent loadvie
 
