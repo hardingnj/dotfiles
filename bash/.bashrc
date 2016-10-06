@@ -66,6 +66,7 @@ alias runtime='find . -name "*o.txt" -exec grep -Hni "total runtime" '"'"'{}'"'"
 alias aggjn='qstat | grep " qw"| awk '"'"'{print $3}'"'"' | sort | uniq -c'
 alias nl='nautilus .'
 alias cdp='cd $(pwd -P)'
+alias rsync='rsync --progress'
 
 # Ignore case for auto complete
 bind 'set completion-ignore-case on'
@@ -79,9 +80,22 @@ manopt(){ man $1 |sed 's/.\x08//g'|sed -n "/^\s\+-\+$2\b/,/^\s*$/p"|sed '$d;';}
 export EDITOR=vim
 export TERM=xterm
 source /etc/profile
-export SVN_MERGE_SET='1'
 
 export BCV_HOME=/path/to/examples/bcvhome
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/oicr/local/analysis/sw/boost/boost_1_53_0/lib
+export GOPATH=/home/njh/gocode
 
-export PATH=$PATH:/home/njh/src/bin
+export PATH=/home/njh/src/bin:$PATH
+export PATH=/usr/local/texlive/2015/bin/x86_64-linux/:$PATH
+
+#export WORKON_HOME=~/pyenv
+#source /usr/local/bin/virtualenvwrapper.sh
+
+export WTC=well.ox.ac.uk
+export FOX=foxtrot.$WTC
+export ECH=echo.$WTC
+export DEL=delta.$WTC
+
+# added by Miniconda3 4.0.5 installer
+xconda () { export PATH="/home/njh/miniconda3/bin:$PATH"; }
+
+xpyenv () { export WORKON_HOME=~/pyenv; source /usr/local/bin/virtualenvwrapper.sh; }
