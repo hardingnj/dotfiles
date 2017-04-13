@@ -96,6 +96,6 @@ export ECH=echo.$WTC
 export DEL=delta.$WTC
 
 # added by Miniconda3 4.0.5 installer
-xconda () { export PATH="/home/njh/miniconda3/bin:$PATH"; }
+xconda () { export PATH="/home/njh/miniconda3/bin:$PATH"; alias sa='source activate'; deac='source deactivate'; }
 
 xpyenv () { export WORKON_HOME=~/pyenv; source /usr/local/bin/virtualenvwrapper.sh; }

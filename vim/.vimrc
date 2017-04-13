@@ -55,3 +55,8 @@ endfunction
 
 nnoremap <silent> <leader>e :call argumentrewrap#RewrapArguments()<CR>:call Indent()<CR>
 nnoremap <silent> <leader>w :call argumentrewrap#RewrapArguments()<CR>:call Indent2()<CR>
+
+au BufNewFile,BufRead Snakefile set syntax=snakemake
+au BufNewFile,BufRead *.rules set syntax=snakemake
+au BufNewFile,BufRead *.snakefile set syntax=snakemake
+au BufNewFile,BufRead *.snake set syntax=snakemake
