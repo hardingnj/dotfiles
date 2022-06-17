@@ -6,6 +6,17 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# avoid duplicates..
+export HISTCONTROL=ignoredups:erasedups
+
+# append history entries..
+shopt -s histappend
+
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+########################################
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
@@ -52,18 +63,11 @@ alias rl='readlink -f'
 alias qrshcwd='qrsh -wd `pwd` -pty y bash -i'
 alias ll='ls -hl'
 alias dushd='find . -maxdepth 1 -type d -exec du -sh {} \;'
-alias qq='qstat -r | grep "job-ID\|----\|njh\|jobname" | sed 3~1"N;s/\n *Full jobname: */ /"|less'
 alias la='ls -A'
-alias tv='module load tmux vim'
-alias quser='qstat -s r -u "*" | awk '"'"'{print $4}'"'"' | sort | uniq -c | sort -n'
-alias qwait='qq| grep " qw"| wc -l'
 alias l='ls -CF'
 alias open='xdg-open'
 alias cd..='cd ..'
 alias lesss='less -S'
-alias runtime='find . -name "*o.txt" -exec grep -Hni "total runtime" '"'"'{}'"'"' \;'
-alias aggjn='qstat | grep " qw"| awk '"'"'{print $3}'"'"' | sort | uniq -c'
-alias nl='nautilus .'
 alias cdp='cd $(pwd -P)'
 alias rsync='rsync --progress'
 alias xclip='xclip -selection c'
@@ -73,24 +77,10 @@ bind 'set completion-ignore-case on'
 
 # Functions
 # turn epoch into data
-epoch () { perl -e "print scalar(localtime($*))"; echo; }
-# display only selected option in manfile
-manopt(){ man $1 |sed 's/.\x08//g'|sed -n "/^\s\+-\+$2\b/,/^\s*$/p"|sed '$d;';} 
 
 export EDITOR=vim
 export TERM=xterm
 source /etc/profile
 
-export BCV_HOME=/path/to/examples/bcvhome
-export GOPATH=/home/njh/gocode
-
 export PATH=/home/njh/src/bin:$PATH
 export PATH=/usr/local/texlive/2015/bin/x86_64-linux/:$PATH
-
-#export WORKON_HOME=~/pyenv
-#source /usr/local/bin/virtualenvwrapper.sh
-
-export WTC=well.ox.ac.uk
-export FOX=foxtrot.$WTC
-export ECH=echo.$WTC
-export DEL=delta.$WTC
