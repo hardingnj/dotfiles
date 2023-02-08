@@ -8,26 +8,6 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# avoid duplicates..
-export HISTCONTROL=ignoredups:erasedups
-
-# append history entries..
-shopt -s histappend
-
-# After each command, save and reload history
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -85,8 +65,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -95,11 +75,6 @@ fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -128,8 +103,7 @@ fi
 
 # some more ls aliases
 alias rl='readlink -f'
-alias qrshcwd='qrsh -wd `pwd` -pty y bash -i'
-alias ll='ls -hl'
+alias ll='ls -hal'
 alias dushd='find . -maxdepth 1 -type d -exec du -sh {} \;'
 alias la='ls -A'
 alias l='ls -CF'
@@ -139,6 +113,59 @@ alias lesss='less -S'
 alias cdp='cd $(pwd -P)'
 alias rsync='rsync --progress'
 alias xclip='xclip -selection c'
+alias gls='gsutil ls'
+alias gcp='gsutil cp'
+alias gst='gsutil stat'
+alias gca='gsutil cat'
+
+
 
 # Ignore case for auto complete
 bind 'set completion-ignore-case on'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/njh/google-cloud-sdk/path.bash.inc' ]; then . '/home/njh/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/njh/google-cloud-sdk/completion.bash.inc' ]; then . '/home/njh/google-cloud-sdk/completion.bash.inc'; fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/njh/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/njh/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/njh/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/njh/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/home/njh/miniconda3/etc/profile.d/mamba.sh" ]; then
+    . "/home/njh/miniconda3/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+
+export PATH="/home/njh/.local/bin:$PATH"
+
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+
+# append history entries..
+shopt -s histappend
+
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
